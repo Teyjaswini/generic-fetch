@@ -129,6 +129,9 @@ function onPostSubmit(eve) {
     makeApiCall(POSTS_URL, "POST", newPost)
         .then(res => {
             postForm.reset()
+
+            snackbar(`The Post with ID ${res.name} is added successfully!!!`, 'success') 
+
             cl(res) // create a new card in UI
             let col = document.createElement('div')
             col.className = `col-md-4 mb-4`
@@ -179,6 +182,8 @@ function onEdit(ele) {
             userIdControl.value = res.userId;
             addPostBtn.classList.add('d-none')
             updatePostBtn.classList.remove('d-none')
+            snackbar(`The Post with ID ${EDIT_ID} is patched successfully!!!`, 'success') 
+
         })
         .catch(err => {
             snackbar(err)
@@ -215,6 +220,8 @@ function onPostUpdate() {
             col.querySelector('.card-body p').innerText = res.content;
             updatePostBtn.classList.add('d-none')
             addPostBtn.classList.remove('d-none')
+            snackbar(`The Post with ID ${UPDATE_ID} is updated successfully!!!`, 'success') 
+
         })
         .catch(err => {
             cl(err)
@@ -244,6 +251,8 @@ function onRemove(ele) {
                 .then(res => {
                     cl(res)
                     ele.closest('.col-md-4').remove()
+                    snackbar(`The Post with ID ${REMOVE_ID} is removed successfully!!!`, 'success') 
+
                 })
                 .catch(err => {
                     snackbar(err)
